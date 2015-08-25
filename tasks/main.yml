@@ -1,0 +1,36 @@
+---
+- name: Install apt-transport-https
+  apt: name=apt-transport-https state=present
+  sudo: yes
+
+- name: Add apt key
+  apt_key: url=https://repo.varnish-cache.org/GPG-key.txt state=present
+  sudo: yes
+
+- name: Varnish Cache Source
+  lineinfile:
+      dest=/etc/apt/sources.list.d/varnish-cache.list
+      line="deb https://repo.varnish-cache.org/ubuntu/ trusty varnish-4.0"
+      create=yes
+      state=present
+  sudo: yes
+
+- name: Update Apt Cache
+  apt: update_cache=yes
+  sudo: yes
+
+- name: Install Varnish
+  apt: name=varnish state=present
+  sudo: yes
+
+- name: Set Service
+  service: name=varnish enabled=yes state=started
+  sudo: yes
+
+- name: Setup Varnish Defaults
+  template:
+    src=varnish.j2
+    dest=/etc/default/varnish
+    mode=0644
+  sudo: yes
+  notify: varnish-restart

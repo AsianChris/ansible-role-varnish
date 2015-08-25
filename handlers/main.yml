@@ -1,0 +1,24 @@
+---
+- name: varnish-start
+  service:
+    name=varnish
+    start=started
+  sudo: yes
+
+- name: varnish-stop
+  service:
+    name=varnish
+    start=stopped
+  sudo: yes
+
+- name: varnish-reload
+  service:
+    name=varnish
+    state=reloaded
+  sudo: yes
+
+- name: varnish-restart
+  service:
+    name=varnish
+    state=restarted
+  sudo: yes
