@@ -8,7 +8,7 @@
 # edit that file.
 
 # Should we start varnishd at boot?  Set to "no" to disable.
-START=yes
+START={{ varnish.start }}
 
 # Maximum number of open files (for ulimit -n)
 NFILES=131072
@@ -43,11 +43,11 @@ MEMLOCK=82000
 # one content server selected by the vcl file, based on the request.
 # Use a 256MB memory based cache.
 #
-DAEMON_OPTS="-a :{{ varnish.port }} \
-             -T {{ varnish.admin }} \
-             -f {{ varnish.vcl }} \
-             -S {{ varnish.secret }} \
-             -s {{ varnish.storage }}"
+DAEMON_OPTS="-a :{{ varnish.daemon.port }} \
+             -T {{ varnish.daemon.admin }} \
+             -f {{ varnish.daemon.vcl }} \
+             -S {{ varnish.daemon.secret }} \
+             -s {{ varnish.daemon.storage }}"
 
 
 ## Alternative 3, Advanced configuration

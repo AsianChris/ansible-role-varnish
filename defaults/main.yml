@@ -1,7 +1,9 @@
 ---
 varnish:
-  port: 6081
-  admin: localhost:6082
-  vcl: /etc/varnish/default.vcl
-  secret: /etc/varnish/secret
-  storage: malloc,256m
+  start: 'yes'
+  daemon:
+    port: 6081
+    admin: localhost:6082
+    vcl: /etc/varnish/default.vcl
+    secret: /etc/varnish/secret
+    storage: malloc,256m
